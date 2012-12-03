@@ -10,4 +10,8 @@
 
 @interface ARViewController : UIViewController
 
+@property () IBOutlet UITextView *outputText;
+
+- (IBAction)showNotes:(id)sender;
+
 @end

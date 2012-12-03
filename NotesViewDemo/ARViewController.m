@@ -7,8 +7,9 @@
 //
 
 #import "ARViewController.h"
+#import "NotesViewController.h"
 
-@interface ARViewController ()
+@interface ARViewController () <NotesViewControllerDelegate>
 
 @end
 
@@ -24,6 +25,32 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
+{
+    return YES;
+}
+
+- (IBAction)showNotes:(id)sender
+{
+    NSLog(@"should show");
+    NotesViewController *notesView = [NotesViewController notesViewController];
+    NSLog(@"%@", notesView);
+    notesView.delegate = self;
+    [self.navigationController presentViewController:notesView animated:YES completion:nil];
+}
+
+//--------------------------------------------------------------------------------------------------------------------------
+#pragma mark - NotesViewController Delegate Methods
+
+- (void)notesWillCloseWithContents:(id)notes
+{
+}
+
+- (void)notesDidCloseWithContents:(id)notes
+{
+    self.outputText.text = (NSString *)notes;
 }
 
 @end

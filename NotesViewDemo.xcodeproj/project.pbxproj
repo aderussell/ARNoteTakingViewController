@@ -18,6 +18,9 @@
 		3AF562E9166CF4A100A6595A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF562E8166CF4A100A6595A /* Default-568h@2x.png */; };
 		3AF562EC166CF4A100A6595A /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3AF562EA166CF4A100A6595A /* MainStoryboard.storyboard */; };
 		3AF562EF166CF4A100A6595A /* ARViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF562EE166CF4A100A6595A /* ARViewController.m */; };
+		3AF562FB166CF5AA00A6595A /* NotePadTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF562FA166CF55400A6595A /* NotePadTextView.m */; };
+		3AF562FC166CF5AA00A6595A /* NotesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AF562F7166CF54800A6595A /* NotesViewController.m */; };
+		3AF562FD166CF69A00A6595A /* NotesView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3AF562F8166CF54800A6595A /* NotesView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +40,11 @@
 		3AF562EB166CF4A100A6595A /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		3AF562ED166CF4A100A6595A /* ARViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ARViewController.h; sourceTree = "<group>"; };
 		3AF562EE166CF4A100A6595A /* ARViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ARViewController.m; sourceTree = "<group>"; };
+		3AF562F6166CF54800A6595A /* NotesViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotesViewController.h; sourceTree = "<group>"; };
+		3AF562F7166CF54800A6595A /* NotesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotesViewController.m; sourceTree = "<group>"; };
+		3AF562F8166CF54800A6595A /* NotesView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotesView.xib; sourceTree = "<group>"; };
+		3AF562F9166CF55400A6595A /* NotePadTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotePadTextView.h; sourceTree = "<group>"; };
+		3AF562FA166CF55400A6595A /* NotePadTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotePadTextView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,7 @@
 		3AF562D8166CF4A100A6595A /* NotesViewDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3AF562F5166CF53400A6595A /* Notes view Stuff (what you need) */,
 				3AF562E1166CF4A100A6595A /* ARAppDelegate.h */,
 				3AF562E2166CF4A100A6595A /* ARAppDelegate.m */,
 				3AF562EA166CF4A100A6595A /* MainStoryboard.storyboard */,
@@ -105,6 +114,18 @@
 				3AF562E8166CF4A100A6595A /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3AF562F5166CF53400A6595A /* Notes view Stuff (what you need) */ = {
+			isa = PBXGroup;
+			children = (
+				3AF562F9166CF55400A6595A /* NotePadTextView.h */,
+				3AF562FA166CF55400A6595A /* NotePadTextView.m */,
+				3AF562F6166CF54800A6595A /* NotesViewController.h */,
+				3AF562F7166CF54800A6595A /* NotesViewController.m */,
+				3AF562F8166CF54800A6595A /* NotesView.xib */,
+			);
+			name = "Notes view Stuff (what you need)";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -159,6 +180,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF562FD166CF69A00A6595A /* NotesView.xib in Resources */,
 				3AF562DD166CF4A100A6595A /* InfoPlist.strings in Resources */,
 				3AF562E5166CF4A100A6595A /* Default.png in Resources */,
 				3AF562E7166CF4A100A6595A /* Default@2x.png in Resources */,
@@ -174,6 +196,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AF562FB166CF5AA00A6595A /* NotePadTextView.m in Sources */,
+				3AF562FC166CF5AA00A6595A /* NotesViewController.m in Sources */,
 				3AF562DF166CF4A100A6595A /* main.m in Sources */,
 				3AF562E3166CF4A100A6595A /* ARAppDelegate.m in Sources */,
 				3AF562EF166CF4A100A6595A /* ARViewController.m in Sources */,
@@ -260,6 +284,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NotesViewDemo/NotesViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "NotesViewDemo/NotesViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -271,6 +296,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "NotesViewDemo/NotesViewDemo-Prefix.pch";
 				INFOPLIST_FILE = "NotesViewDemo/NotesViewDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
