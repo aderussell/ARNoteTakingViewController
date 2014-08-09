@@ -1,18 +1,19 @@
 
-Notes Taking Modal is a modal view for the iPad that resembles a sheet of note paper.
+ARNoteTakingViewController is an iOS View Controller that provides a basic interface for taking a note.
 
-It is designed to be fired and forgotten.
+The view controller can be used either modally, in a navigation controller, or in a popover controller.
 
+## Using for modal or navigation controller
+The view controller works like any other and can be created simply by calling `init`.
 
-To create and show the notes view...
+## Using the popover controller
+There is a supplied method `+ (UIPopoverController *)notesViewPopoverWithContentSize:(CGSize)size;` that should be used when a popover is required as opoosed to creating an ARNoteTakingViewController and embedding in a UIPopoverController yourself.
 
+## Handling
+ARNoteTakingViewController has a property that allows you to add a block to be notified when the view controller is dismiised.
 
-NotesViewController *notesView = [NotesViewController notesViewController];
-notesView.delegate = self;
-[self.navigationController presentViewController:notesView animated:YES completion:nil];
+`@property (copy, nonatomic) void (^dismissHandler)(BOOL cancelled, NSString *note);`
 
+The `cancelled` argument informs if the note was cancelled or should be saved; if it is `YES` then ignore the note
 
-To get note text when view is dismissed implement one or both of the following delegate methods...
-
-- (void)notesWillCloseWithContents:(id)notes;
-- (void)notesDidCloseWithContents:(id)notes;
+The `note` argument contains whatever note the user has written.

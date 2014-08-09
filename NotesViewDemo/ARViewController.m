@@ -7,10 +7,11 @@
 //
 
 #import "ARViewController.h"
-#import "NotesViewController.h"
+#import "ARNoteTakingViewController.h"
 
-@interface ARViewController () <NotesViewControllerDelegate>
-
+@interface ARViewController ()
+@property UIPopoverController *popover;
+@property IBOutlet UITextView *outputArea;
 @end
 
 @implementation ARViewController
@@ -18,39 +19,72 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation
-{
-    return YES;
+    self.outputArea.layer.borderWidth = 1.0;
 }
 
 - (IBAction)showNotes:(id)sender
 {
-    NSLog(@"should show");
-    NotesViewController *notesView = [NotesViewController notesViewController];
-    NSLog(@"%@", notesView);
-    notesView.delegate = self;
+    ARNoteTakingViewController *notesView = [ARNoteTakingViewController new];
+    notesView.title = @"Add a Note (Formsheet Modal)";
+    notesView.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    notesView.dismissHandler = ^(BOOL cancelled, NSString *note) {
+        if (!cancelled)
+            self.outputArea.text = [@"Formsheet Modal: " stringByAppendingString:note];
+    };
+    
     [self.navigationController presentViewController:notesView animated:YES completion:nil];
 }
 
-//--------------------------------------------------------------------------------------------------------------------------
-#pragma mark - NotesViewController Delegate Methods
-
-- (void)notesWillCloseWithContents:(id)notes
+- (IBAction)showNotesModalFullscreen:(id)sender
 {
+    ARNoteTakingViewController *notesView = [ARNoteTakingViewController new];
+    notesView.title = @"Add a Note (Fullscreen Modal)";
+    notesView.modalPresentationStyle = UIModalPresentationFullScreen;
+    
+    notesView.dismissHandler = ^(BOOL cancelled, NSString *note) {
+        if (!cancelled)
+            self.outputArea.text = [@"Fullscreen Modal: " stringByAppendingString:note];
+    };
+    
+    [self presentViewController:notesView animated:YES completion:nil];
 }
 
-- (void)notesDidCloseWithContents:(id)notes
+- (IBAction)showInNavigationController:(id)sender
 {
-    self.outputText.text = (NSString *)notes;
+    ARNoteTakingViewController *notesView = [ARNoteTakingViewController new];
+    notesView.title = @"Add a Note (Navigation Controller)";
+    
+    notesView.dismissHandler = ^(BOOL cancelled, NSString *note) {
+        if (!cancelled)
+            self.outputArea.text = [@"Navigation Controller: " stringByAppendingString:note];
+    };
+    
+    
+    [self.navigationController pushViewController:notesView animated:YES];
+}
+
+
+- (IBAction)showPopover:(id)sender
+{
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        self.popover = [ARNoteTakingViewController notesViewPopoverWithContentSize:CGSizeMake(400, 300)];
+        ARNoteTakingViewController *vc = (ARNoteTakingViewController *)self.popover.contentViewController;
+        vc.title = @"Add a Note (Popover)";
+        
+        vc.dismissHandler = ^(BOOL cancelled, NSString *note) {
+            if (!cancelled)
+                self.outputArea.text = [@"Popover: " stringByAppendingString:note];
+        };
+        
+        vc.modalInPopover = YES;
+        
+        [self.popover presentPopoverFromRect:[sender frame] inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    } else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Nope" message:@"Popovers not on iPhone" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    
 }
 
 @end
